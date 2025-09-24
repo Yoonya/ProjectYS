@@ -14,7 +14,6 @@ namespace YunSun
 		}
 		public void Destroy()
 		{
-            tiles = null;
 		}
     }
 }
