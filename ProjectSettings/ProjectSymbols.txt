@@ -1,0 +1,27 @@
+///
+///  "///" 뒤는 주석입니다.
+///  구분자( ',' ':' '=' )로 분리되며, 분리된 문자열에서 스페이스( ' ' )와 탭( '\t' )은 제거됩니다.
+///  분리된 좌는 심벌명(Symbol Name)이고 우는 상태(state)와 설명(Desc)으로 나눕니다.
+///
+///  * 참고) State 은 심벌 설정을 말하며 설정값은 아래와 같습니다.
+///      "Unused" - 설정 창에 표기되지 않으며, 현재 사용하지 않고 있는 심벌.
+///      "Enable" - 설정(On/Off)이 가능한 심벌.
+///      "Editor" - 에디터에서 심벌 설정 없이 출력되는 로그 심벌.
+///
+///  #.GROUP : 키워드를 통해 심벌 그룹화 함. 심벌이 많아져 구분을 위함.
+///  
+#.GROUP : Unity System Symbols
+ADDRESSABLES_LOG_ALL : Enable, Addressable 모든 로그 출력 심벌.
+
+#.GROUP : Service System Symbols
+
+_GAMEBASE_			: Enable, Gamebase SDK 적용을 위한 심벌.
+_QA_MODE_			: Enable, QA 모드 설정을 위한 심벌.
+_PATCH_MODE_		: Enable, 패치 다운르도 모드 설정을 위한 심벌.
+_ONE_STORE_			: Enable, 원 스토어 설정을 위한 심벌.
+_GALAXY_STORE_		: Enable, 삼성 갤럭시 스토어 설정을 위한 심벌.
+
+#.GROUP : Log Symbols
+
+_LOG_NET_ 			: Enable, 네트웍 정보 출력을 위한 로그 심벌
+_LOG_GAME_			: Enable, 아이템 인벤/장착/... 등 정보 출력을 위한 로그

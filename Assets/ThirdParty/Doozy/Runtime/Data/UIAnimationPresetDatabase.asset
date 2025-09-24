@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729240fcaac44731bc938698902f0a2d, type: 3}
+  m_Name: UIAnimationPresetDatabase
+  m_EditorClassIdentifier: 
+  ShowPresets:
+    GroupAnimationType: 0
+    Presets:
+    - {fileID: 11400000, guid: 7fd9f9bc8416bfd438c6af736896ce7c, type: 2}
+    - {fileID: 11400000, guid: 2ccb5e8a0a07f0344abaed6e95da6d75, type: 2}
+    - {fileID: 11400000, guid: 685e5dd7b6c01e5409a21382595ebad9, type: 2}
+    - {fileID: 11400000, guid: 1cd462ff4cf412f4dbc0d1781082e235, type: 2}
+    - {fileID: 11400000, guid: f5e7b1154a217334e8b149ffae81fec2, type: 2}
+    - {fileID: 11400000, guid: 6919863175b7d3947844798ae29058a2, type: 2}
+    - {fileID: 11400000, guid: d6362a47a6184354c81619a382e86c5c, type: 2}
+    - {fileID: 11400000, guid: 3f0d72d549b74c348abc29401ceb5e76, type: 2}
+    CategoryNames:
+    - Basic
+    - Basic1
+    - Default
+    PresetCategories:
+    - Category: Basic1
+      Names:
+      - PopupFade
+    - Category: Basic
+      Names:
+      - MoveFromCenter
+      - MoveFromLeft
+      - MoveFromRight
+      - PopupFade
+      - PopupSide
+      - WinScale
+    - Category: Default
+      Names:
+      - Default
+  HidePresets:
+    GroupAnimationType: 1
+    Presets:
+    - {fileID: 11400000, guid: 18167b8e08582ef4ca157c498613fbda, type: 2}
+    - {fileID: 11400000, guid: 17126293063bfe64eb5115cc2542188e, type: 2}
+    - {fileID: 11400000, guid: 8dfbdb1cc3f1ebc4d873ccdafa68c975, type: 2}
+    - {fileID: 11400000, guid: 751fef581b9e4b045b8a5f5a87361a22, type: 2}
+    - {fileID: 11400000, guid: fbd3f2f6a1c5af241ae3bf0ebe3bc2db, type: 2}
+    - {fileID: 11400000, guid: 1f59c78a9107e724e9b908f6a5e63db8, type: 2}
+    - {fileID: 11400000, guid: 3dd65a27ec2cc8348bcaaa4285ba6148, type: 2}
+    CategoryNames:
+    - Basic1
+    - Default
+    PresetCategories:
+    - Category: Basic1
+      Names:
+      - HideFromCenter
+      - HideFromLeft
+      - HideFromRight
+      - PopupFade
+      - PopupSide
+      - WinScale
+    - Category: Default
+      Names:
+      - Default
+  LoopPresets:
+    GroupAnimationType: 2
+    Presets:
+    - {fileID: 11400000, guid: b91d2386c99770a47a0ba312ff4850ce, type: 2}
+    CategoryNames:
+    - Default
+    PresetCategories:
+    - Category: Default
+      Names:
+      - Default
+  ButtonPresets:
+    GroupAnimationType: 3
+    Presets:
+    - {fileID: 11400000, guid: 1f22cb1fbf45e7e4c930eab25faba7e2, type: 2}
+    CategoryNames:
+    - Default
+    PresetCategories:
+    - Category: Default
+      Names:
+      - Default
+  StatePresets:
+    GroupAnimationType: 4
+    Presets:
+    - {fileID: 11400000, guid: 0b191ecebe1861e49af8944b218d084d, type: 2}
+    CategoryNames:
+    - Default
+    PresetCategories:
+    - Category: Default
+      Names:
+      - Default
+  ResetPresets:
+    GroupAnimationType: 5
+    Presets:
+    - {fileID: 11400000, guid: 8c0f8a86ec04d6242b9e9337ca95d895, type: 2}
+    CategoryNames:
+    - Default
+    PresetCategories:
+    - Category: Default
+      Names:
+      - Default
+  CustomPresets:
+    GroupAnimationType: 6
+    Presets:
+    - {fileID: 11400000, guid: c710b185d24b8684e9cf2ece535dec97, type: 2}
+    CategoryNames:
+    - Default
+    PresetCategories:
+    - Category: Default
+      Names:
+      - Default
