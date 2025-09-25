@@ -23,6 +23,16 @@ namespace YunSun
 			}
 		}
 	}
+	public partial class AppManager
+	{
+		public GameManager GameManager;
+
+        void Awake()
+        {
+            GameManager = new GameManager();
+			GameManager.Initialize();
+        }
+    }
 
 	public partial class AppManager
 	{

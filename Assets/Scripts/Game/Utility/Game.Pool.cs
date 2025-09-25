@@ -14,8 +14,8 @@ namespace YunSun.Game
             CustomerPool = new ObjectPool<Customer>(
                 createFunc: () =>
                 {
-                    var customer = Instantiate( Resources.Load("Temp/Customer") );
-                    var result = customer.AddComponent<Customer>();
+                    var customer = Instantiate( Resources.Load<GameObject>("Temp/Customer1") );
+                    var result = customer.GetComponent<Customer>();
                     return result;
                 },
                 actionOnGet: ( it ) => ActionOnGet( it ),
@@ -39,7 +39,7 @@ namespace YunSun.Game
         }
         private void ActionOnRelease( Customer customer )
         {
-            customer.Reset();
+            customer.Clean();
             customer.SetActiveEx( false );
         }
     }
