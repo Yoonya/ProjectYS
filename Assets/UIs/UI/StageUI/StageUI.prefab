@@ -1346,6 +1346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsTopView: 0
   IsMenuClose: 0
+  counter: {fileID: 3561228477663635953}
 --- !u!223 &3397160780349332394
 Canvas:
   m_ObjectHideFlags: 0
@@ -3041,10 +3042,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1928178514459757629, guid: 9f8d3b11a8fd86c4da1263d23557b2ec, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f8d3b11a8fd86c4da1263d23557b2ec, type: 3}
+--- !u!114 &3561228477663635953 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7029379435089404531, guid: 9f8d3b11a8fd86c4da1263d23557b2ec, type: 3}
+  m_PrefabInstance: {fileID: 3395334559945602172}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6327f12b7f1f44091ea08e6e0665af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6374170423914579187 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8605038521156169871, guid: 9f8d3b11a8fd86c4da1263d23557b2ec, type: 3}
