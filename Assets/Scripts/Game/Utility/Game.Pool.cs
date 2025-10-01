@@ -1,7 +1,6 @@
 namespace YunSun.Game
 {
     using Character;
-    using Unity.VisualScripting;
     using UnityEngine;
     using UnityEngine.Pool;
 
@@ -34,7 +33,6 @@ namespace YunSun.Game
 
         private void ActionOnGet( Customer customer )
         {
-            customer.Apply( customer );
             customer.SetActiveEx( true );
         }
         private void ActionOnRelease( Customer customer )

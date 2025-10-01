@@ -1,9 +1,8 @@
 namespace YunSun.Game.Character
 {
-    using System.Collections.Generic;
-    using System.Data.Common;
     using UnityEngine;
     using System.Collections;
+    using UnityEditor.ShaderGraph;
 
     public class Customer : MonoBehaviour
     {
@@ -32,14 +31,11 @@ namespace YunSun.Game.Character
             orderNum = -1;
             moveCoroutine = null;
         }
-        public void Apply( Customer customer )
+        public void Apply()
         {
-            if ( customer == null )
-                return;
-
             this.rect = gameObject.GetComponent<RectTransform>();
-            this.id = customer.id;
-            this.customerType = customer.customerType;
+            this.id = 0;
+            this.customerType = CustomerType.Normal;
         }
         public void ComesOrder()
         {
@@ -54,12 +50,17 @@ namespace YunSun.Game.Character
             this.orderNum = num;
         }
 
-        public void SetLocation( Counter counter )
+        public void InitLocation( Counter counter )
         {
             this.counter = counter;
+            var counterRect = counter.GetComponent<RectTransform>();
 
-            float newX = counter.GetComponent<RectTransform>().anchoredPosition.x;
-            float newY = ( orderNum + 1 ) * rect.rect.height + rect.rect.height * MaxCuStomer_Line;
+            float newX = 0;
+            float newY = counterRect.anchoredPosition.y //Start에서 시작해서 그런가? 값이 바뀜
+            + ( counterRect.rect.height / 2 ) 
+            + ( orderNum + 1 ) * rect.rect.height
+            + rect.rect.height * MaxCuStomer_Line;
+
             rect.anchoredPosition = new Vector2( newX, newY );
             rect.localScale = new Vector3( 1, 1, 1 ); 
         } 
@@ -84,9 +85,12 @@ namespace YunSun.Game.Character
 
         private IEnumerator Move()
         {
+            var counterRect = counter.GetComponent<RectTransform>();
+
             var start = rect.anchoredPosition;
             var target = new Vector2( start.x
-            , counter.GetComponent<RectTransform>().anchoredPosition.y 
+            ,  counterRect.anchoredPosition.y 
+            + ( counterRect.rect.height / 2 )
             + ( orderNum + 1 ) * rect.rect.height 
             );
             var time = 0f;

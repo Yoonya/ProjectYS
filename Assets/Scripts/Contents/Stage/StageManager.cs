@@ -2,15 +2,15 @@ namespace YunSun
 {
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEditor;
     using UnityEngine;
-    using YunSun.UI;
+    using YunSun.Game.Character;
 
     public class StageManager 
         : Singleton<StageManager>
         , IManager
     {
-        public Game.Pool customerPool;
+        private Game.Pool customerPool;
+
         public int brand;
         public int hpRate;
         public int day;
@@ -27,16 +27,14 @@ namespace YunSun
 		}
 		public void Destroy()
 		{
+            customerPool = null;
 		}
-        public void SetCustomerPool( Counter counter )
+        public void InitCustomerPool( Counter counter )
         {
             for( int i = 0; i < 10; i++ )
             {
                 var customer = customerPool.GetCustomerPool();
-                customer.SetParent( counter.GetComponent<Transform>() );
-                customer.SetOrder( i );
-                customer.SetLocation( counter );
-                customer.MovetoLocation();
+                counter.AddCustomer( customer );
             }
         }
     }
