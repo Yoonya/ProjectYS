@@ -11,7 +11,7 @@ namespace YunSun.UI
         [SerializeField] List<Counter> counters;
 
         private StageManager StageManager;
-		const int MaxCounter = 4;
+		const int MaxCounter = 3;
 
         void Start()
         {

@@ -28,9 +28,7 @@ namespace YunSun
         {
             customer.Apply();
             customer.SetParent( GetComponent<Transform>() );
-            customer.SetOrder( customers.Count );
-            customer.InitLocation( this );
-            customer.MovetoLocation();
+            customer.InitLocation( this, customers.Count );
             customers.Add( customer );
         }
         public void OutCustomer()
@@ -42,7 +40,6 @@ namespace YunSun
             for( int i = 0; i < customers.Count; i++ )
             {
                 customers[i].SetOrder( i );
-                customers[i].MovetoLocation();
             }
         }
         private void OnClick()

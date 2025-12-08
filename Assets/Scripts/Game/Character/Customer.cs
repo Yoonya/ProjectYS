@@ -11,13 +11,18 @@ namespace YunSun.Game.Character
         private CustomerType customerType;
         private Counter counter; 
         private int orderNum;
-        private Coroutine moveCoroutine;
+
+        private Coroutine Cor_MoveComes;
+        private Coroutine Cor_MoveOut;
+
 
         public bool isValid => id >= 0;
         public bool isSpecial => customerType != CustomerType.Normal;
         public bool isOrder => orderNum == 0;
 
         private const int MaxCuStomer_Line = 10; //GlobalTable
+        private const float Move_Time = 1f;
+        private const float MoveSide_Time = 0.5f;
 
         private Customer()
         {
@@ -29,7 +34,8 @@ namespace YunSun.Game.Character
             customerType = CustomerType.Normal;
             counter = null;
             orderNum = -1;
-            moveCoroutine = null;
+            Cor_MoveComes = null;
+            Cor_MoveOut = null;
         }
         public void Apply()
         {
@@ -37,22 +43,20 @@ namespace YunSun.Game.Character
             this.id = 0;
             this.customerType = CustomerType.Normal;
         }
-        public void ComesOrder()
-        {
-            orderNum--;
-            if( orderNum < 0 )
-                OutAnimation();
-            else
-                ComesAnimation();
-        }
         public void SetOrder( int num )
         {   
             this.orderNum = num;
+
+            if( orderNum == 10 - 1 ) // 후에 globaltable에 max연결
+                MovetoOut();
+            else
+                MovetoComes();
         }
 
-        public void InitLocation( Counter counter )
+        public void InitLocation( Counter counter, int num )
         {
             this.counter = counter;
+            this.orderNum = num;
             var counterRect = counter.GetComponent<RectTransform>();
 
             float newX = 0;
@@ -63,45 +67,65 @@ namespace YunSun.Game.Character
 
             rect.anchoredPosition = new Vector2( newX, newY );
             rect.localScale = new Vector3( 1, 1, 1 ); 
-        } 
-        public void OnClick()
-        {
 
+            MovetoComes();
         }
-        private void ComesAnimation()
+        private void MovetoComes()
         {
-
+			if( Cor_MoveOut != null ) //rect.anchoredPosition 사용 겹침
+				return;
+            if( Cor_MoveComes != null )
+				AppMaster.StopCoroutine( Cor_MoveComes );
+            Cor_MoveComes = AppMaster.StartCoroutine( MoveComes() );
         }
-        private void OutAnimation()
+        private void MovetoOut()
         {
-
+            if( Cor_MoveOut != null )
+                AppMaster.StopCoroutine( Cor_MoveOut );
+            Cor_MoveOut = AppMaster.StartCoroutine( MoveOut() );
         }
-        public void MovetoLocation()
+        private IEnumerator MoveComes()
         {
-            if( moveCoroutine!= null )
-                AppMaster.StopCoroutine( moveCoroutine );
-           moveCoroutine = AppMaster.StartCoroutine( Move() );
-        }
+            var start = rect.anchoredPosition;
+            var target = GetTargetLocation( start.x );
 
-        private IEnumerator Move()
+            var time = 0f;
+			while( time < Move_Time )
+			{
+				rect.anchoredPosition = Vector2.Lerp( start, target, time / Move_Time );
+				time += Time.deltaTime;
+				yield return null;
+			}
+        }
+		private IEnumerator MoveOut()
+		{
+			IEnumerator MoveLerp( Vector2 start, Vector2 target, float duration )
+			{
+				var time = 0f;
+				while( time < duration )
+				{
+					rect.anchoredPosition = Vector2.Lerp( start, target, time / duration );
+					time += Time.deltaTime;
+					yield return null;
+				}
+			}
+
+			var InitLocation = rect.anchoredPosition;
+			yield return MoveLerp( InitLocation, new Vector2( InitLocation.x + rect.rect.width, InitLocation.y ), MoveSide_Time ); //move right
+			yield return MoveLerp( rect.anchoredPosition, GetTargetLocation( InitLocation.x + rect.rect.width ), Move_Time ); //move finalLine
+			yield return MoveLerp( rect.anchoredPosition, new Vector2( InitLocation.x, rect.anchoredPosition.y ), MoveSide_Time ); //move left
+
+			Cor_MoveOut = null;
+		}
+        private Vector2 GetTargetLocation( float startX )
         {
             var counterRect = counter.GetComponent<RectTransform>();
 
-            var start = rect.anchoredPosition;
-            var target = new Vector2( start.x
+            return new Vector2( startX
             ,  counterRect.anchoredPosition.y 
             + ( counterRect.rect.height / 2 )
             + ( orderNum + 1 ) * rect.rect.height 
             );
-            var time = 0f;
-            var duration = 1f;
- 
-            while ( time < duration )
-            {
-                rect.anchoredPosition = Vector2.Lerp( start, target, time / duration );
-                time += Time.deltaTime;
-                yield return null;
-            }
         }
     }         
 }
