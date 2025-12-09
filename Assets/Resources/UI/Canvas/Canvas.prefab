@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3474e98f0a829c46b07e3e260e58797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groupID: 1
+  groupID: 0
   canvas: {fileID: 0}
   caster: {fileID: 0}
   isNonScale: 0
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3474e98f0a829c46b07e3e260e58797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groupID: 3
+  groupID: 1
   canvas: {fileID: 0}
   caster: {fileID: 0}
   isNonScale: 0
@@ -354,7 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3474e98f0a829c46b07e3e260e58797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groupID: 7
+  groupID: 2
   canvas: {fileID: 0}
   caster: {fileID: 0}
   isNonScale: 1

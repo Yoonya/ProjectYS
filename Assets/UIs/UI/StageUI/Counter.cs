@@ -47,6 +47,7 @@ namespace YunSun
             if( !isCooldown ) 
             {
                 OutCustomer();
+				StageManager.Instance.SetScore( null );
                 AppMaster.StartCoroutine( CooldownCoroutine() );
             }           
         }

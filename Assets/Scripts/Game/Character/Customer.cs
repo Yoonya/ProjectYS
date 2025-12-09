@@ -7,8 +7,9 @@ namespace YunSun.Game.Character
     public class Customer : MonoBehaviour
     {
         private RectTransform rect;
-        private int id;
-        private CustomerType customerType;
+        private int uid;
+		//후에 CustomerTableData 추가
+        private CustomerType customerType; 
         private Counter counter; 
         private int orderNum;
 
@@ -16,7 +17,7 @@ namespace YunSun.Game.Character
         private Coroutine Cor_MoveOut;
 
 
-        public bool isValid => id >= 0;
+        public bool isValid => uid >= 0;
         public bool isSpecial => customerType != CustomerType.Normal;
         public bool isOrder => orderNum == 0;
 
@@ -30,7 +31,7 @@ namespace YunSun.Game.Character
         }
         public void Clean()
         {
-            id = -1;
+            uid = -1;
             customerType = CustomerType.Normal;
             counter = null;
             orderNum = -1;
@@ -40,7 +41,7 @@ namespace YunSun.Game.Character
         public void Apply()
         {
             this.rect = gameObject.GetComponent<RectTransform>();
-            this.id = 0;
+            this.uid = 0;
             this.customerType = CustomerType.Normal;
         }
         public void SetOrder( int num )

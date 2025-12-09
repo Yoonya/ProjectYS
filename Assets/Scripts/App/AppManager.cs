@@ -22,16 +22,27 @@ namespace YunSun
 				return _inst;
 			}
 		}
+
+		void Awake()
+		{
+			_inst = GetComponent<AppManager>();
+			DontDestroyOnLoad( gameObject );
+			Initialize();
+		}
+		
 	}
 	public partial class AppManager
 	{
 		public GameManager GameManager;
 
-        void Awake()
-        {
-            GameManager = new GameManager();
+		private void Initialize()
+		{
+			GameManager = new GameManager();
 			GameManager.Initialize();
-        }
+			GameUI.Initialize();
+
+			GameManager.GameStart();
+		}
     }
 
 	public partial class AppManager

@@ -1,41 +1,33 @@
 namespace YunSun.UI
 {
     using System.Collections.Generic;
-    using UnityEngine;
+	using TMPro;
+	using UnityEditor.SceneManagement;
+	using UnityEngine;
+	using UnityEngine.UI;
 
-    public partial class StageUI 
-    {
-    }
+	public partial class StageUI
+	{
+		private void RefreshUI()
+		{
+			Text_Sales.SetTextEx( StageManager.Sales.ToString() );
+			Img_Rating.SetFillAmount( StageManager.Rating / 100f );
+		}
+	}
     public partial class StageUI : BaseUI
     {
+		[SerializeField] TMP_Text Text_Sales;
+		[SerializeField] Image Img_Rating;
         [SerializeField] List<Counter> counters;
 
         private StageManager StageManager;
 		const int MaxCounter = 3;
 
-        void Start()
-        {
-            StageManager = StageManager.Instance;
-
-			for( int i = 0; i < MaxCounter; i++ )
-			{
-				var counter = counters[i];
-				counter.Init();
-				StageManager.Instance.InitCustomerPool( counter );
-			}
-        }
         public override void Initialize()
 		{
 			base.Initialize();
 			{
 				StageManager = StageManager.Instance;
-
-                for( int i = 0; i < MaxCounter; i++ )
-                {
-                    var counter = counters[i];
-					counter.Init();
-                    StageManager.Instance.InitCustomerPool( counter );
-                }
 			}
 		}
 		public override void Localize()
@@ -48,7 +40,12 @@ namespace YunSun.UI
 		{
 			base.Show();
 			{
-                
+                for( int i = 0; i < MaxCounter; i++ )
+                {
+                    var counter = counters[i];
+					counter.Init();
+                    StageManager.Instance.InitCustomerPool( counter );
+                }
 			}
 		}
 		public override void Hide( bool instant )
@@ -66,6 +63,14 @@ namespace YunSun.UI
 		}
 		public override bool OnRefresh( RefreshID id )
 		{
+			switch( id )
+			{
+				case RefreshID.Stage:
+				{
+					RefreshUI();
+					return true;
+				}
+			}
 			return base.OnRefresh( id );
 		}
     }

@@ -26,7 +26,7 @@ namespace YunSun.UI
 	static public partial class Atlas
 	{
 		static public bool IsInitialized() { return AtlasManager.Instance.IsInit; }
-		static public void Initialize() { MainManager.Add( AtlasManager.Instance ); }
+		static public void Initialize() { }//{ MainManager.Add( AtlasManager.Instance ); }
 		static public void Destroy() { MainManager.Remove( typeof( AtlasManager ) ); }
 
 		static public void Loading( Action<bool, float> onProgress )

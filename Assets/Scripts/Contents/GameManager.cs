@@ -1,10 +1,11 @@
 namespace YunSun
 {
     using UnityEngine;
+	using UI;
 
-    public partial class GameManager : IManager
-    {
-	    public bool Initialize()
+	public partial class GameManager : IManager
+	{
+		public bool Initialize()
 		{
 			InitializeData();
 			return true;
@@ -12,8 +13,12 @@ namespace YunSun
 		public void Destroy()
 		{
 			DestroyData();
-		}    
-    }
+		}
+		public void GameStart()
+		{
+			GameUI.Show<StageUI>( GroupID.Main );
+		}
+	}
 
     public partial class GameManager
     {

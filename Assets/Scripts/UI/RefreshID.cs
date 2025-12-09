@@ -2,6 +2,9 @@ namespace YunSun
 {
 	public enum RefreshID
 	{
+		//!< NEW
+		Stage,
+		
 		//!< GameScene
 		NetworkFailure,
 		ChangeLoginID,

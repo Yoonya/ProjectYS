@@ -8,7 +8,9 @@ namespace YunSun.UI
 
 	static public partial class Util
 	{
-		const string                AddrFmtPath = "UI/{0}/{1}.prefab";
+		//const string                AddrFmtPath = "UI/{0}/{1}.prefab";
+		const string                AddrFmtPath = "Assets/UIs/UI/{0}/{1}.prefab";
+
 		static readonly Quaternion  InitRotation = new Quaternion();
 		static readonly Vector3     InitPosition = new Vector3( 0f, 0f, 0f );
 
@@ -16,26 +18,30 @@ namespace YunSun.UI
 		{
 			Log.Output( "Instance Try. : {0}", $"<color=white>{uiName}</color>" );
 			var uiKey = GetLoadUIKey( uiName );
-			Addressables.LoadResourceLocationsAsync( uiKey ).Completed += ( handle ) =>
-			{
-				if( 0 < handle.Result.Count )
-				{
-					var op = Addressables.InstantiateAsync( handle.Result[0], /*InitPosition, InitRotation,*/ parent );
-					{
-						op.Completed += ( goHandle ) =>
-						{
-							Log.Output( "Instantiate. : {0}", $"<color=white>{uiName}</color>" );
-							callback?.Invoke( goHandle.Result );
-						};
-					}
-				}
-				else
-				{
-					Log.Error( "Resource isn't exists. : {0}", $"<color=white>{uiKey}</color>" );
-					callback?.Invoke( null );
-				}
-				Addressables.Release( handle );
-			};
+			var obj = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>( uiKey );
+			obj = GameObject.Instantiate( obj , parent );
+			callback?.Invoke( obj );
+			
+			//Addressables.LoadResourceLocationsAsync( uiKey ).Completed += ( handle ) =>
+			//{
+			//	if( 0 < handle.Result.Count )
+			//	{
+			//		var op = Addressables.InstantiateAsync( handle.Result[0], /*InitPosition, InitRotation,*/ parent );
+			//		{
+			//			op.Completed += ( goHandle ) =>
+			//			{
+			//				Log.Output( "Instantiate. : {0}", $"<color=white>{uiName}</color>" );
+			//				callback?.Invoke( goHandle.Result );
+			//			};
+			//		}
+			//	}
+			//	else
+			//	{
+			//		Log.Error( "Resource isn't exists. : {0}", $"<color=white>{uiKey}</color>" );
+			//		callback?.Invoke( null );
+			//	}
+			//	Addressables.Release( handle );
+			//};
 		}
 		static public bool Instantiate( string uiName, Transform parent, out GameObject uiObject )
 		{
