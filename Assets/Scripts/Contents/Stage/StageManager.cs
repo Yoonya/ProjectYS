@@ -1,10 +1,9 @@
 namespace YunSun
 {
+	using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-	using UnityEditor.Sprites;
 	using UnityEngine;
-	using UnityEngine.SocialPlatforms.Impl;
 	using YunSun.Game.Character;
 
 	public class StageManager
@@ -17,11 +16,14 @@ namespace YunSun
 		private int rating;
 		private int day;
 		private int sales;
+		private int close;
+		private Coroutine closeTime;
 
 		public int Brands => brands;
 		public int Rating => rating;
 		public int Day => day;
 		public int Sales => sales;
+		public int Close => close;
 
 		private StageManager()
 		{
@@ -29,6 +31,8 @@ namespace YunSun
 			rating = 100;
 			day = 0;
 			sales = 0;
+			close = 60;
+			closeTime = null;
 		}
 
 		public bool Initialize()
@@ -58,6 +62,29 @@ namespace YunSun
 			if( rating < 0 ) rating = 0;
 
 			GameUI.OnRefresh( RefreshID.Stage );
+		}
+		public void StageStart()
+		{
+			close = 60;
+			closeTime = AppMaster.StartCoroutine( CloseTime() );
+		}
+		public void StageEnd()
+		{
+			if( closeTime != null )
+				AppMaster.StopCoroutine( closeTime );
+			closeTime = null;
+		}
+		private IEnumerator CloseTime()
+		{
+			while( close > 0 )
+			{
+				yield return new WaitForSeconds( 1f );
+				close--;
+				GameUI.OnRefresh( RefreshID.Stage );
+			}
+
+			StageEnd();
+			yield break;
 		}
     }
 }

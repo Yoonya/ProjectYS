@@ -10,13 +10,17 @@ namespace YunSun.UI
 	{
 		private void RefreshUI()
 		{
+			Text_Day.SetTextEx( StageManager.Day.ToString() );
 			Text_Sales.SetTextEx( StageManager.Sales.ToString() );
+			Text_CloseTime.SetTextEx( StageManager.Close.ToString() );
 			Img_Rating.SetFillAmount( StageManager.Rating / 100f );
 		}
 	}
     public partial class StageUI : BaseUI
     {
+		[SerializeField] TMP_Text Text_Day;
 		[SerializeField] TMP_Text Text_Sales;
+		[SerializeField] TMP_Text Text_CloseTime;
 		[SerializeField] Image Img_Rating;
         [SerializeField] List<Counter> counters;
 
@@ -40,12 +44,13 @@ namespace YunSun.UI
 		{
 			base.Show();
 			{
-                for( int i = 0; i < MaxCounter; i++ )
-                {
-                    var counter = counters[i];
+				for( int i = 0; i < MaxCounter; i++ )
+				{
+					var counter = counters[i];
 					counter.Init();
-                    StageManager.Instance.InitCustomerPool( counter );
-                }
+					StageManager.InitCustomerPool( counter );
+				}
+				StageManager.StageStart();
 			}
 		}
 		public override void Hide( bool instant )

@@ -31,16 +31,16 @@ namespace YunSun
             customer.InitLocation( this, customers.Count );
             customers.Add( customer );
         }
-        public void OutCustomer()
-        {
-            var customer = customers.First();
-            customers.Remove( customer );
-            customers.Add( customer );
+		public void OutCustomer()
+		{
+			var customer = customers.First();
+			customers.Remove( customer );
+			customers.Add( customer );
 
-            for( int i = 0; i < customers.Count; i++ )
-            {
-                customers[i].SetOrder( i );
-            }
+			for( int i = 0; i < customers.Count; i++ )
+			{
+				customers[i].SetOrder( i );
+			}
         }
         private void OnClick()
         {
