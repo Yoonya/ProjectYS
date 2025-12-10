@@ -26,7 +26,7 @@ namespace YunSun.UI
 	static public partial class Atlas
 	{
 		static public bool IsInitialized() { return AtlasManager.Instance.IsInit; }
-		static public void Initialize() { }//{ MainManager.Add( AtlasManager.Instance ); }
+		static public void Initialize() { MainManager.Add( AtlasManager.Instance ); }
 		static public void Destroy() { MainManager.Remove( typeof( AtlasManager ) ); }
 
 		static public void Loading( Action<bool, float> onProgress )
@@ -136,10 +136,23 @@ namespace YunSun.UI
 			}
 			private void LoadAtals( AtlasType type, Action<SpriteAtlas> onResult )
 			{
+				var key = $"Assets/UIs/UIAtlas/{type.ToString()}.spriteatlasv2";
+				{
+					Log.Output( $"Atlas Loading Try : <color=white>{key}</color>" );
+				}
+				var spriteAtlas = UnityEditor.AssetDatabase.LoadAssetAtPath<SpriteAtlas>( key );
+				if( spriteAtlas != null )
+				{
+					AddAtlas( type, spriteAtlas );
+					onResult?.Invoke( spriteAtlas );
+				}
+				onResult?.Invoke( null );
+				/*
 				var key = $"{type.ToString()}.spriteatlas";
 				{
 					Log.Output( $"Atlas Loading Try : <color=white>{key}</color>" );
 				}
+
 				Addressables.LoadResourceLocationsAsync( key ).Completed += handle =>
 				{
 					if( 0 < handle.Result.Count )
@@ -166,6 +179,7 @@ namespace YunSun.UI
 					}
 					Addressables.Release( handle );
 				};
+				*/
 			}
 			private void RequestAtlas( string tag, Action<SpriteAtlas> onAction )
 			{

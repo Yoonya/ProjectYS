@@ -41,6 +41,8 @@ namespace YunSun
 			GameManager.Initialize();
 			GameUI.Initialize();
 
+			UI.Atlas.Loading( null ); //temp atlas 로딩하는거 나중에 패치로
+
 			GameManager.GameStart();
 		}
     }
